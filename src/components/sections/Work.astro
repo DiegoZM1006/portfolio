@@ -1,0 +1,86 @@
+---
+import { IconLink } from "@tabler/icons-react";
+
+const resume = [
+    {
+        img: "./suarec.jpeg",
+        name: "Suarec - Technology Startup",
+        links: {
+            website: "https://suarec.com",
+        },
+        position: "Full-Stack Developer",
+        duration: "June 2025 - Current",
+        place: "Cali, Colombia",
+        achievements: [
+            "Implemented frontend features using Next.js, improving user retention by 15% through a smoother and more intuitive experience.",
+            "Developed and optimized backend services in NestJS integrated with relational databases such as PostgreSQL, reducing response times by 20% and increasing overall system consistency.",
+            "Contributed to the development of a mobile application using React Native for Android and iOS, enhancing platform accessibility and expanding reach to mobile users."
+        ]
+    },
+    {
+        img: "./encora.webp",
+        name: "Winner of Encora's TechTitans Bootcamp",
+        links: {
+            instagram: "https://www.instagram.com/p/C9K4h6fRJsX/?img_index=1"
+        },
+        position: "Frontend Development Lead",
+        duration: "June 2024 - July 2025",
+        place: "Cali, Colombia",
+        achievements: [
+            "Led the full frontend development of the project, building modern and responsive interfaces that improved user experience by 25%.",
+            "Implemented reusable components and best practices in React, reducing the team’s development time by 30%.",
+            "Integrated the frontend with external APIs, ensuring smooth navigation and achieving up to 20% faster load times."
+        ]
+    },
+    {
+        img: "./icesi.png",
+        name: "Icesi University",
+        position: "Class Monitor (Introduction to Systems Engineering)",
+        duration: "February 2022 - December 2023",
+        place: "Cali, Colombia",
+        achievements: [
+            "Evaluated student assignments to ensure academic and technical standards, receiving 95% positive feedback from lead professors.",
+            "Guided students on projects and coursework, contributing to a 12% improvement in their average grades.",
+            "Organized and facilitated review sessions, increasing student participation by 20%."
+        ]
+    }
+]
+---
+
+<section id="work" class="w-full max-w-[750px] px-5 py-10 mx-auto flex flex-col gap-8 block-dashed-no-top">
+    <h2 class="text-2xl dark:text-white">My Work Experience</h2>
+    <ul class="flex flex-col gap-8">
+        {resume.map((job) => (
+            <li class="flex flex-col gap-4">
+                <div class="flex flex-row gap-2">
+                    <img src={job.img} alt={job.name} width="56" height="56" class="rounded-md object-contain"/>
+                    <div class="flex flex-col w-full">
+                        <div class="flex flex-row justify-between items-center font-bold">
+                            <!-- TODO: Make a understandable way to show a job link in mobile with a very good UI/UX -->
+                            <h3 class="flex flex-row gap-3 items-center dark:text-white">
+                                {job.name}
+                                <span class="hidden sm:block">
+                                    {job.links && (
+                                        <a href={job.links.website ?? job.links.instagram} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
+                                            <IconLink size={20} />
+                                        </a>
+                                    )}
+                                </span>
+                            </h3>
+                            <p class="dark:text-white hidden sm:block">{job.place}</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start text-secondary text-sm">
+                            <p>{job.position}</p>
+                            <p>{job.duration}</p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="flex flex-col gap-2 list-disc list-inside">
+                    {job.achievements.map((achievement) => (
+                        <li class="text-secondary dark:text-white text-sm">{achievement}</li>
+                    ))}
+                </ul>
+            </li>
+        ))}
+    </ul>
+</section>

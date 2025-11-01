@@ -1,0 +1,58 @@
+---
+import Java from "../icons/Java.astro"
+import Postgresql from "../icons/Postgres.astro"
+import Nestjs from "../icons/Nest.astro"
+
+import {
+    IconBrandHtml5,
+    IconBrandCss3,
+    IconBrandJavascript,
+    IconBrandReact,
+    IconBrandAstro,
+    IconBrandNextjs,
+    IconBrandTailwind,
+    IconBrandPython,
+    IconBrandMysql,
+    IconBrandMongodb,
+    IconBrandGit,
+    IconBrandGithub,
+    IconBrandDocker,
+    IconBrandFigma,
+    IconBrandFramer
+} from "@tabler/icons-react"
+
+const skills = [
+    { name: "HTML5", icon: IconBrandHtml5 },
+    { name: "CSS3", icon: IconBrandCss3 },
+    { name: "JavaScript", icon: IconBrandJavascript },
+    { name: "React", icon: IconBrandReact },
+    { name: "Astro", icon: IconBrandAstro },
+    { name: "NextJS", icon: IconBrandNextjs },
+    { name: "NestJS", icon: Nestjs },
+    { name: "TailwindCSS", icon: IconBrandTailwind },
+    { name: "Java", icon: Java },
+    { name: "Python", icon: IconBrandPython },
+    { name: "MySQL", icon: IconBrandMysql },
+    { name: "PostgreSQL", icon: Postgresql },
+    { name: "MongoDB", icon: IconBrandMongodb },
+    { name: "Git", icon: IconBrandGit },
+    { name: "Github", icon: IconBrandGithub },
+    { name: "Docker", icon: IconBrandDocker },
+    { name: "Figma", icon: IconBrandFigma },
+    { name: "Framer", icon: IconBrandFramer }
+]
+---
+
+<section id="skills" class="w-full max-w-[750px] px-5 py-10 mx-auto flex flex-col gap-8 block-dashed-no-top"> 
+    <h2 class="text-2xl dark:text-white">Tools <span class="text-accent">&</span> Technologies</h2>
+    <ul class="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-8 place-items-center">
+        {skills.map(({
+            name,
+            icon: Icon
+        }) => (
+            <li class="flex flex-col gap-2 items-center dark:text-white hover:text-accent hover:scale-110 transition-all">
+                <Icon size={56} stroke={1.25} />
+                <p class="text-secondary dark:text-white text-sm">{name}</p>
+            </li>
+        ))}
+</section>

@@ -1,0 +1,164 @@
+---
+import { IconX } from "@tabler/icons-react";
+
+const projects = [
+  // {
+  //   title: "Pomify",
+  //   description: "Description for project one.",
+  //   link: "https://example.com/project-one",
+  //   colorHover: "hover:text-red-700",
+  //   backgroundColor: "bg-red-700",
+  //   backgroundImage: "",
+  //   technologies: ["React"]
+  // },
+  {
+    title: "Suarec",
+    description: "Platform to find job opportunities and connect with employers.",
+    link: "https://www.suarec.com",
+    colorHover: "hover:text-blue-700",
+    backgroundColor: "bg-blue-700",
+    backgroundImage: "/shot_suarec.png",
+    technologies: ["NestJS", "NextJS", "Tailwind CSS", "TypeScript", "PostgreSQL", "React Native"]
+  },
+  // {
+  //   title: "Api-Play",
+  //   description: "Description for project three.",
+  //   link: "https://example.com/project-three",
+  //   colorHover: "hover:text-green-700",
+  //   backgroundColor: "bg-green-700",
+  //   backgroundImage: "",
+  //   technologies: ["React"]
+  // },
+  {
+    title: "KZUrban",
+    description: "E-commerce platform for urban fashion and streetwear.",
+    link: "https://www.kzurbanstyle.com",
+    colorHover: "hover:text-purple-700",
+    backgroundColor: "bg-purple-700",
+    backgroundImage: "/shot_kz.png",
+    technologies: ["NextJS", "TypeScript", "Tailwind CSS", "PostgreSQL"]
+  },
+  // {
+  //   title: "DevBoard",
+  //   description: "Description for project three.",
+  //   link: "https://example.com/project-three",
+  //   colorHover: "hover:text-yellow-700",
+  //   backgroundColor: "bg-yellow-700",
+  //   backgroundImage: "",
+  //   technologies: ["React"]
+  // },
+];
+---
+
+<style>
+  li:hover {
+    width: 100%;
+  }
+
+  .shot-image {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  li:hover .shot-image {
+    opacity: 1;
+    visibility: visible;
+    transition: all .5s ease-in-out;
+  }
+
+  .tech-box {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  li:hover .tech-box {
+    opacity: 1;
+    visibility: visible;
+    transition: all .5s ease-in-out;
+  }
+</style>
+
+<section id="projects" class="w-full max-w-[750px] px-5 py-10 mx-auto flex flex-col gap-8 block-dashed-no-top">
+  <div>
+    <h2 class="text-2xl dark:text-white">Projects</h2>
+    <h3 class="text-secondary">Some of my notable works</h3>
+  </div>
+  <ul class="flex flex-col gap-8 items-center py-10">
+    {projects.map((project) => (
+      <li class="w-full md:w-fit relative hover:[&>.shot-image]:animate-slide-in-left hover:[&>.tech-box]:animate-slide-in-right">
+
+        <! -- Project Shot Image -->
+        <a href={project.link} target="_blank" rel="noopener noreferrer" class={`shot-image hidden md:flex absolute -top-[50%] left-[-125px] w-[200px] h-[200px] rounded-md overflow-hidden ${project.backgroundColor} shadow-lg transition-opacity duration-300 rotate-6 hover:cursor-pointer hover:[&>img]:scale-110 `}>
+          <img src={project.backgroundImage} alt={project.title} class="object-cover overflow-visible h-full w-full ml-12 -mt-1 transition-transform duration-100 ease-in-out" />
+        </a>
+
+        <h3 class={`md:hidden title-btn text-6xl sm:text-8xl text-center uppercase text-secondary font-black transition-colors duration-300 ease-in-out content-fit hover:cursor-pointer ${project.colorHover}`}>
+          {project.title}
+        </h3>
+
+        <h3 class={`hidden md:block text-6xl sm:text-8xl text-center uppercase text-secondary font-black transition-colors duration-300 ease-in-out content-fit hover:cursor-pointer ${project.colorHover}`}>
+          {project.title}
+        </h3>
+
+        <!-- Project Components (Mobile) -->
+        <div class="translate-y-full fixed md:hidden top-0 right-0 left-0 bottom-0 transition-transform duration-400 ease-in-out bg-black/50 backdrop-blur-md z-10">
+          <div class="shadow-2xl bg-white dark:bg-primary py-10 px-5">
+            <button id="close-btn" class="w-fit ml-auto text-accent flex flex-row gap-1 items-center justify-center">Close <IconX /></button>
+            <img src={project.backgroundImage} alt={project.title} class="object-cover overflow-visible w-full h-auto mx-auto" />
+            <p class="text-xl text-primary dark:text-white">{project.description}</p>
+            <div class={`ml-auto w-full rounded-lg flex-col gap-3`}>
+              <div class="flex flex-wrap gap-2 mt-4">
+                {project.technologies.map((tech) => (
+                  <span class="px-2 py-1 text-xs font-medium bg-primary text-white dark:bg-white dark:text-primary bg-opacity-20 rounded-full backdrop-blur-sm border border-white border-opacity-30">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <a href={project.link} target="_blank" class="mt-6 inline-block text-sm font-medium text-primary dark:text-white underline">View Project</a>
+          </div>
+        </div>
+        
+        <!-- Project Technologies -->
+        <div class={`tech-box hidden absolute -top-[50%] right-[-125px] w-[200px] h-[200px] rounded-lg -rotate-6 md:flex flex-col gap-3 p-2`}>
+          <p class="text-sm font-bold text-primary dark:text-white">Technologies:</p>
+          <div class="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <span class="px-2 py-1 text-xs font-medium bg-primary text-white dark:bg-white dark:text-primary bg-opacity-20 rounded-full backdrop-blur-sm border border-white border-opacity-30">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  // Mobile Project Modal Logic
+  const projectItems = document.querySelectorAll('section#projects ul li');
+  const body = document.body;
+
+  projectItems.forEach((item) => {
+    const title = item.querySelector('.title-btn');
+    const closeBtn = item.querySelector('div.translate-y-full button#close-btn');
+    const modal = item.querySelector('div.translate-y-full');
+
+    title?.addEventListener('click', () => {
+      if (modal) {
+        body.classList.add('overflow-hidden');
+        modal.classList.remove('translate-y-full');
+      }
+    });
+
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent the click from bubbling up to the li
+      if (modal) {
+        modal.classList.add('translate-y-full');
+        body.classList.remove('overflow-hidden');
+      }
+    });
+  });
+</script>

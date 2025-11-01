@@ -1,0 +1,159 @@
+---
+import { IconSun, IconMoon, IconMenu2, IconX } from "@tabler/icons-react";
+---
+
+<section class="flex flex-row max-w-[730px] mx-5 sm:mx-auto px-3 sm:px-5 py-2 justify-between items-center dark:text-white z-10 fixed top-2 right-0 left-0 bg-white/30 backdrop-blur-sm dark:bg-gray-900/30 rounded-full transition-all animate-slide-in-bottom">
+    <h1>
+        <a href="#home">diegozm</a>
+    </h1>
+    <nav class="hidden sm:block">
+        <ul class="flex flex-row gap-3 [&>li>a]:transition-all [&>li>a]:duration-100 [&>li>a]:ease-in-out">
+            <li><a href="#work" class="hover:border-b-2 border-accent">Resume</a></li>
+            <li><a href="#projects" class="hover:border-b-2 border-accent">Projects</a></li>
+            <li><a href="#skills" class="hover:border-b-2 border-accent">Skills</a></li>
+            <li><a href="#about" class="hover:border-b-2 border-accent">About</a></li>
+        </ul>
+    </nav>
+    <article class="flex flex-row sm:gap-3">
+        <a href="#contact" class="hidden sm:block p-2 bg-accent text-white rounded-md hover:bg-accent-hover transition-colors">
+            Contact me
+        </a>
+        <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:cursor-pointer">
+            <span id="theme-icon-sun" class="hidden dark:block">
+                <IconSun />
+            </span>
+            <span id="theme-icon-moon" class="block dark:hidden">
+                <IconMoon />
+            </span>
+        </button>
+        <button id="menu-btn" class="sm:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:cursor-pointer">
+            <IconMenu2 />
+        </button>
+    </article>
+</section>
+
+<!-- Mobile Menu (hidden by default) -->
+<article id="mobile-menu" class="fixed z-10 top-0 right-0 bottom-0 w-full flex flex-col gap-4 text-primary dark:text-white bg-white dark:bg-primary py-10 px-5 sm:hidden justify-between overflow-y-hidden translate-x-full transition-transform duration-300 ease-in-out">
+    <button id="close-btn" class="w-fit ml-auto text-accent flex flex-row gap-1 items-center justify-center">Close <IconX /></button>
+    <div class="flex flex-col grow gap-2 h-full [&>a]:uppercase [&>a]:font-bold [&>a]:text-3xl">
+        <a href="#work">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact me</a>
+    </div>
+    <div class="flex flex-col gap-2">
+        <p class="text-accent">Socials</p>
+        <div class="flex flex-row gap-4">
+            <a href="https://www.linkedin.com/in/diego-fmz" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/diegozm1006" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+    </div>
+</article>
+
+<script>
+    // Función para obtener el tema inicial
+    function getThemePreference(): string {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+            return localStorage.getItem('theme') || 'light';
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Función para actualizar el tema
+    function updateTheme(theme: string) {
+        const isDark = theme === 'dark';
+        const html = document.documentElement;
+        
+        if (isDark) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        
+        localStorage.setItem('theme', theme);
+        console.log('Tema actualizado a:', theme);
+    }
+
+    // Inicializar el tema al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        const theme = getThemePreference();
+        updateTheme(theme);
+
+        // Manejar el click en el botón
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                const newTheme = isDark ? 'light' : 'dark';
+                updateTheme(newTheme);
+            });
+        } else {
+            console.error('No se encontró el botón theme-toggle');
+        }
+
+        // Colocar border a la navbar al hacer scroll
+        const navbar = document.querySelector('section');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar?.classList.add('border', 'border-gray-200', 'dark:border-gray-700', 'shadow-md');
+            } else {
+                navbar?.classList.remove('border', 'border-gray-200', 'dark:border-gray-700', 'shadow-md');
+            }
+        });
+
+        // Colocar active class al link correspondiente
+        const navLinks = document.querySelectorAll('nav ul li a');
+        window.addEventListener('scroll', () => {
+            const fromTop = window.scrollY + 100;
+            navLinks.forEach(link => {
+                const section = document.querySelector(link.getAttribute('href') || '');
+                if (section && section instanceof HTMLElement) {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    if (top <= fromTop && top + height > fromTop) {
+                        link.classList.add('border-b-2', 'border-accent');
+                    } else {
+                        link.classList.remove('border-b-2', 'border-accent');
+                    }
+                } else {
+                    link.classList.remove('border-b-2', 'border-accent');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuButton = document.getElementById('menu-btn');
+        const closeButton = document.getElementById('close-btn');
+        const links = mobileMenu?.querySelectorAll('a');
+
+        const openMenu = () => {
+            if (mobileMenu) {
+                mobileMenu.classList.remove('translate-x-full');
+                document.body.classList.add('overflow-hidden'); // Bloquea el scroll
+            }
+        };
+
+        const closeMenu = () => {
+            if (mobileMenu) {
+                mobileMenu.classList.add('translate-x-full');
+                document.body.classList.remove('overflow-hidden'); // Permite el scroll
+            }
+        };
+
+        menuButton?.addEventListener('click', openMenu);
+        closeButton?.addEventListener('click', closeMenu);
+
+        links?.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        }); 
+    });
+
+    // Listener para cambios en la preferencia del sistema
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            updateTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+</script>

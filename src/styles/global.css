@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@import '@fontsource/poppins/100.css';
+@import '@fontsource/poppins/200.css';
+@import '@fontsource/poppins/300.css';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/poppins/800.css';
+@import '@fontsource/poppins/900.css';
+@import "tw-animate-css";
+
+@plugin "@midudev/tailwind-animations";
+
+@theme {
+    --font-poppins: 'Poppins', sans-serif;
+
+    /* Color Palette (WHITE)*/
+    --color-primary: #0D1B2A;
+    --color-secondary: #9E9E9E;
+    --color-accent: #3B82F6;
+    --color-accent-hover: #1864de;
+    --bg-soft: #F5F5F5;
+
+    /* Color Palette (DARK)*/
+}
+
+/* Habilitar dark mode basado en clase */
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+    font-family: var(--font-poppins);
+    margin: 0;
+    padding: 0;
+}
+
+/* Variable para el color de los bordes según el tema */
+:root {
+    --border-color: #000000;
+}
+
+:root.dark {
+    --border-color: #FFFFFF;
+}
+
+/* Utility Classes con soporte automático para dark mode */
+.block-dashed-no-top {
+    background-image: 
+        repeating-linear-gradient(180deg, var(--border-color), var(--border-color) 6px, transparent 6px, transparent 18px), 
+        repeating-linear-gradient(90deg, var(--border-color), var(--border-color) 6px, transparent 6px, transparent 18px), 
+        repeating-linear-gradient(180deg, var(--border-color), var(--border-color) 6px, transparent 6px, transparent 18px);
+    background-position: right top, left bottom, left top;
+    background-repeat: repeat-y, repeat-x, repeat-y;
+    background-size: 1px 100%, 100% 1px, 1px 100%;
+}
+
+.block-dashed-no-bottom {
+    background-image: 
+        repeating-linear-gradient(180deg, var(--border-color), var(--border-color) 6px, transparent 6px, transparent 18px), 
+        repeating-linear-gradient(180deg, var(--border-color), var(--border-color) 6px, transparent 6px, transparent 18px);
+    background-position: right top, left top;
+    background-repeat: repeat-y, repeat-y;
+    background-size: 1px 100%, 1px 100%;
+}
