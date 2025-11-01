@@ -101,7 +101,7 @@ const projects = [
         </h3>
 
         <!-- Project Components (Mobile) -->
-        <div class="translate-y-full fixed md:hidden top-0 right-0 left-0 bottom-0 transition-transform duration-400 ease-in-out bg-black/50 backdrop-blur-md z-10">
+        <div class="translate-x-full fixed md:hidden top-0 right-0 left-0 bottom-0 transition-transform duration-400 ease-in-out bg-black/50 backdrop-blur-md z-10">
           <div class="shadow-2xl bg-white dark:bg-primary py-10 px-5">
             <button id="close-btn" class="w-fit ml-auto text-accent flex flex-row gap-1 items-center justify-center">Close <IconX /></button>
             <img src={project.backgroundImage} alt={project.title} class="object-cover overflow-visible w-full h-auto mx-auto" />
@@ -143,20 +143,20 @@ const projects = [
 
   projectItems.forEach((item) => {
     const title = item.querySelector('.title-btn');
-    const closeBtn = item.querySelector('div.translate-y-full button#close-btn');
-    const modal = item.querySelector('div.translate-y-full');
+    const closeBtn = item.querySelector('div.translate-x-full button#close-btn');
+    const modal = item.querySelector('div.translate-x-full');
 
     title?.addEventListener('click', () => {
       if (modal) {
         body.classList.add('overflow-hidden');
-        modal.classList.remove('translate-y-full');
+        modal.classList.remove('translate-x-full');
       }
     });
 
     closeBtn?.addEventListener('click', (e) => {
       e.stopPropagation(); // Prevent the click from bubbling up to the li
       if (modal) {
-        modal.classList.add('translate-y-full');
+        modal.classList.add('translate-x-full');
         body.classList.remove('overflow-hidden');
       }
     });
