@@ -88,8 +88,21 @@ const projects = [
       <li class="w-full md:w-fit relative hover:[&>.shot-image]:animate-slide-in-left hover:[&>.tech-box]:animate-slide-in-right">
 
         <! -- Project Shot Image -->
-        <a href={project.link} target="_blank" rel="noopener noreferrer" class={`shot-image hidden md:flex absolute -top-[50%] left-[-125px] w-[200px] h-[200px] rounded-md overflow-hidden ${project.backgroundColor} shadow-lg transition-opacity duration-300 rotate-6 hover:cursor-pointer hover:[&>img]:scale-110 `}>
-          <img src={project.backgroundImage} alt={project.title} class="object-cover overflow-visible h-full w-full ml-12 -mt-1 transition-transform duration-100 ease-in-out" />
+        <a 
+          href={project.link} 
+          target="_blank" 
+          rel="noopener noreferrer nofollow"
+          aria-label={`View ${project.title} project - ${project.description}`}
+          class={`shot-image hidden md:flex absolute -top-[50%] left-[-125px] w-[200px] h-[200px] rounded-md overflow-hidden ${project.backgroundColor} shadow-lg transition-opacity duration-300 rotate-6 hover:cursor-pointer hover:[&>img]:scale-110`}
+        >
+          <img 
+            src={project.backgroundImage} 
+            alt={`Screenshot of ${project.title} - ${project.description}`}
+            loading="lazy"
+            width="200"
+            height="200"
+            class="object-cover overflow-visible h-full w-full ml-12 -mt-1 transition-transform duration-100 ease-in-out" 
+          />
         </a>
 
         <h3 class={`md:hidden title-btn text-6xl sm:text-8xl text-center uppercase text-secondary font-black transition-colors duration-300 ease-in-out content-fit hover:cursor-pointer ${project.colorHover}`}>
@@ -104,7 +117,12 @@ const projects = [
         <div class="translate-x-full fixed md:hidden top-0 right-0 left-0 bottom-0 transition-transform duration-400 ease-in-out bg-black/50 backdrop-blur-md z-10">
           <div class="shadow-2xl bg-white dark:bg-primary py-10 px-5">
             <button id="close-btn" class="w-fit ml-auto text-accent flex flex-row gap-1 items-center justify-center">Close <IconX /></button>
-            <img src={project.backgroundImage} alt={project.title} class="object-cover overflow-visible w-full h-auto mx-auto" />
+            <img 
+              src={project.backgroundImage} 
+              alt={`Screenshot of ${project.title} - ${project.description}`}
+              loading="lazy"
+              class="object-cover overflow-visible w-full h-auto mx-auto" 
+            />
             <p class="text-xl text-primary dark:text-white">{project.description}</p>
             <div class={`ml-auto w-full rounded-lg flex-col gap-3`}>
               <div class="flex flex-wrap gap-2 mt-4">
@@ -115,7 +133,15 @@ const projects = [
                 ))}
               </div>
             </div>
-            <a href={project.link} target="_blank" class="mt-6 inline-block text-sm font-medium text-primary dark:text-white underline">View Project</a>
+            <a 
+              href={project.link} 
+              target="_blank" 
+              rel="noopener noreferrer nofollow"
+              aria-label={`Visit ${project.title} website`}
+              class="mt-6 inline-block text-sm font-medium text-primary dark:text-white underline"
+            >
+              View Project
+            </a>
           </div>
         </div>
         

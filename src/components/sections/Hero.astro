@@ -5,19 +5,37 @@ import { IconBrandGithubFilled } from "@tabler/icons-react";
 
 <main id="home" class="mx-auto w-full max-w-[750px] pt-20 pb-10 px-5 flex flex-col justify-center items-center gap-6 block-dashed-no-top">
     <article class="flex flex-col sm:flex-row gap-3 w-full">
-        <img src="./photo.png" alt="Cartoon avatar of Diego Fernando Mueses Zuñiga" width="100" height="100" class="bg-accent rounded-md"/>
+        <img 
+          src="./photo.png" 
+          alt="Diego Fernando Mueses Zuñiga - Full-Stack Developer profile picture" 
+          width="100" 
+          height="100"
+          fetchpriority="high"
+          class="bg-accent rounded-md"
+        />
         <div class="flex flex-col gap-2 justify-center">
-            <h2 class="text-xl dark:text-white">
+            <h1 class="text-xl dark:text-white">
                 Diego Fernando Mueses Zuñiga
-            </h2>
+            </h1>
             <p class="text-secondary italic text-sm">
                 Systems/Software Engineer & Full-Stack Developer
             </p>
             <div class="flex flex-row gap-2">
-                <a href="https://www.linkedin.com/in/diego-fmz" target="_blank" rel="noopener noreferrer">
+                <a 
+                  href="https://www.linkedin.com/in/diego-fmz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Visit Diego Mueses LinkedIn profile"
+                >
                     <IconBrandLinkedinFilled color="blue" />
                 </a>
-                <a href="https://github.com/DiegoZM1006" target="_blank" rel="noopener noreferrer" class="text-black dark:text-white">
+                <a 
+                  href="https://github.com/DiegoZM1006" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="Visit Diego Mueses GitHub profile"
+                  class="text-black dark:text-white"
+                >
                     <IconBrandGithubFilled />
                 </a>
             </div>

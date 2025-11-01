@@ -7,12 +7,20 @@ import react from '@astrojs/react';
 
 import netlify from '@astrojs/netlify';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://diegomueses.dev', // Cambia esto por tu URL de producción
+  
   vite: {
     plugins: [tailwindcss()]
   },
 
-  integrations: [react()],
+  integrations: [
+    react(),
+    sitemap()
+  ],
+  
   adapter: netlify()
 });

@@ -43,7 +43,14 @@ const photos = [
         <ul class="sm:hidden photos-scroll flex flex-row gap-10 justify-start overflow-x-scroll w-full p-4 scrollbar-hide">
             {photos.map((photo) => (
                 <li class="shrink-0">
-                    <img src={photo.url} alt={photo.alt} width="200" height="200" class={`aspect-square border-8 border-primary rounded-[30px] overflow-hidden dark:border-white object-cover w-[200px] h-[200px] shadow-lg z-10 ${photo.transform}`} />
+                    <img 
+                      src={photo.url} 
+                      alt={photo.alt} 
+                      width="200" 
+                      height="200"
+                      loading="lazy"
+                      class={`aspect-square border-8 border-primary rounded-[30px] overflow-hidden dark:border-white object-cover w-[200px] h-[200px] shadow-lg z-10 ${photo.transform}`} 
+                    />
                 </li>
             ))}
         </ul>
