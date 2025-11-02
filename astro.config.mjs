@@ -11,7 +11,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://diegomueses.dev', // Cambia esto por tu URL de producción
+  site: 'https://diegozm.netlify.app', // Cambia esto por tu URL de producción
   
   vite: {
     plugins: [tailwindcss()]
