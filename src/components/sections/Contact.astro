@@ -1,16 +1,24 @@
 ---
 import ContactForm from "../contact-form"
+import type { Translations } from "../../i18n";
+
+interface Props {
+    t: Translations["contact"];
+    tForm: Translations["form"];
+}
+
+const { t, tForm } = Astro.props;
 ---
 
 <section id="contact" class="w-full max-w-[750px] px-5 py-10 mx-auto flex items-center flex-col gap-8 block-dashed-no-top">
     <div class="bg-accent-hover rounded-md flex flex-row gap-2 items-center px-4 py-2 w-fit">
         <div class="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
         <p class="text-white">
-            Let's build something together
+            {t.badge}
         </p>
     </div>
     <h2 class="text-2xl text-center dark:text-white">
-        Open to collaborations, freelance work, or full-time opportunities. Feel free to reach out!
+        {t.title}
     </h2>
-    <ContactForm client:load />
+    <ContactForm client:load t={tForm} />
 </section>

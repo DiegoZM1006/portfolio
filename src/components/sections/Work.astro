@@ -1,69 +1,53 @@
 ---
 import { IconLink } from "@tabler/icons-react";
+import type { Translations } from "../../i18n";
 
-const resume = [
+interface Props {
+    t: Translations["work"];
+}
+
+const { t } = Astro.props;
+
+const companies = [
     {
         img: "./Sperientia.png",
         name: "Sperientia: [Studio+Lab]",
-        links: {
-            website: "https://sperientia.com",
-        },
-        position: "Apprentice Trainee",
+        links: { website: "https://sperientia.com" },
         duration: "January 2026 - Current",
         place: "Mexico, Remote",
-        achievements: [
-            "Identify opportunities for using AI in research, analysis, and design processes.",
-            "Design AI-assisted solutions and workflows.",
-            "Use generative AI tools to automate tasks."
-        ]
     },
     {
         img: "./suarec.jpeg",
         name: "Suarec - Technology Startup",
-        links: {
-            website: "https://suarec.com",
-        },
-        position: "Full-Stack Developer",
+        links: { website: "https://suarec.com" },
         duration: "June 2025 - December 2025",
         place: "Cali, Colombia",
-        achievements: [
-            "Implemented frontend features using Next.js, improving user retention by 15% through a smoother and more intuitive experience.",
-            "Developed and optimized backend services in NestJS integrated with relational databases such as PostgreSQL, reducing response times by 20% and increasing overall system consistency.",
-            "Contributed to the development of a mobile application using React Native for Android and iOS, enhancing platform accessibility and expanding reach to mobile users."
-        ]
     },
     {
         img: "./encora.webp",
         name: "Winner of Encora's TechTitans Bootcamp",
-        links: {
-            instagram: "https://www.instagram.com/p/C9K4h6fRJsX/?img_index=1"
-        },
-        position: "Frontend Development Lead",
+        links: { instagram: "https://www.instagram.com/p/C9K4h6fRJsX/?img_index=1" },
         duration: "June 2024 - July 2025",
         place: "Cali, Colombia",
-        achievements: [
-            "Led the full frontend development of the project, building modern and responsive interfaces that improved user experience by 25%.",
-            "Implemented reusable components and best practices in React, reducing the team’s development time by 30%.",
-            "Integrated the frontend with external APIs, ensuring smooth navigation and achieving up to 20% faster load times."
-        ]
     },
     {
         img: "./icesi.png",
         name: "Icesi University",
-        position: "Class Monitor (Introduction to Systems Engineering)",
+        links: undefined,
         duration: "January 2022 - December 2023",
         place: "Cali, Colombia",
-        achievements: [
-            "Evaluated student assignments to ensure academic and technical standards, receiving 95% positive feedback from lead professors.",
-            "Guided students on projects and coursework, contributing to a 12% improvement in their average grades.",
-            "Organized and facilitated review sessions, increasing student participation by 20%."
-        ]
-    }
-]
+    },
+];
+
+const resume = companies.map((company, i) => ({
+    ...company,
+    position: t.resume[i].position,
+    achievements: t.resume[i].achievements,
+}));
 ---
 
 <section id="work" class="w-full max-w-[750px] px-5 py-10 mx-auto flex flex-col gap-8 block-dashed-no-top">
-    <h2 class="text-2xl dark:text-white">My Work Experience</h2>
+    <h2 class="text-2xl dark:text-white">{t.title}</h2>
     <ul class="flex flex-col gap-8">
         {resume.map((job) => (
             <li class="flex flex-col gap-4">
@@ -71,7 +55,6 @@ const resume = [
                     <img src={job.img} alt={job.name} width="56" height="56" class="rounded-md object-contain"/>
                     <div class="flex flex-col w-full">
                         <div class="flex flex-row justify-between items-center font-bold">
-                            <!-- TODO: Make a understandable way to show a job link in mobile with a very good UI/UX -->
                             <h3 class="flex flex-row gap-3 items-center dark:text-white">
                                 {job.name}
                                 <span class="hidden sm:block">

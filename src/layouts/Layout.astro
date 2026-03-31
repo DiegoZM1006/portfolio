@@ -6,40 +6,47 @@ interface Props {
 	description?: string;
 	image?: string;
 	canonical?: string;
+	lang?: string;
 }
 
 const {
 	title = "Diego Mueses | Full-Stack Developer & Software Engineer",
 	description = "Portfolio of Diego Fernando Mueses Zuñiga - Full-Stack Developer specializing in React, Next.js, NestJS, and mobile development. Explore my projects and get in touch.",
 	image = "/photo.png",
-	canonical = Astro.url.pathname
+	canonical = Astro.url.pathname,
+	lang = "en",
 } = Astro.props;
 
-const siteUrl = "https://diegozm.netlify.app"; // Cambia esto por tu URL real cuando deploys
+const siteUrl = "https://diegozm.netlify.app";
 const fullImageUrl = new URL(image, siteUrl).toString();
 const canonicalUrl = new URL(canonical, siteUrl).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
+
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="author" content="Diego Fernando Mueses Zuñiga" />
 		<meta name="keywords" content="Diego Mueses, Full-Stack Developer, Software Engineer, React, Next.js, NestJS, TypeScript, PostgreSQL, React Native, Web Development, Mobile Development, Cali Colombia" />
-		
+
 		<!-- Canonical URL -->
 		<link rel="canonical" href={canonicalUrl} />
-		
+
+		<!-- Hreflang alternates -->
+		<link rel="alternate" hreflang="en" href={siteUrl + "/"} />
+		<link rel="alternate" hreflang="es" href={siteUrl + "/es/"} />
+		<link rel="alternate" hreflang="x-default" href={siteUrl + "/"} />
+
 		<!-- Favicon -->
 		<link rel="icon" type="image/png" href="/photo.png" />
 		<link rel="apple-touch-icon" href="/photo.png" />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
@@ -47,24 +54,25 @@ const canonicalUrl = new URL(canonical, siteUrl).toString();
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={fullImageUrl} />
 		<meta property="og:site_name" content="Diego Mueses Portfolio" />
-		
+		<meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
+
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={canonicalUrl} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={fullImageUrl} />
-		
+
 		<!-- Additional SEO -->
 		<meta name="robots" content="index, follow" />
 		<meta name="googlebot" content="index, follow" />
 		<meta name="theme-color" content="#3b82f6" />
-		
+
 		<!-- Manifest -->
 		<link rel="manifest" href="/manifest.json" />
-		
+
 		<meta name="generator" content={Astro.generator} />
-		
+
 		<!-- Schema.org JSON-LD -->
 		<script type="application/ld+json" is:inline set:html={JSON.stringify({
 			"@context": "https://schema.org",
@@ -95,7 +103,7 @@ const canonicalUrl = new URL(canonical, siteUrl).toString();
 				"Mobile Development"
 			]
 		})} />
-		
+
 		<script is:inline>
 			// Script para evitar el flash de tema incorrecto (FOUC)
 			const theme = (() => {

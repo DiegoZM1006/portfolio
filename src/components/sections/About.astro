@@ -1,5 +1,12 @@
 ---
 import ImagesTrip from "../images-trip"
+import type { Translations } from "../../i18n";
+
+interface Props {
+    t: Translations["about"];
+}
+
+const { t } = Astro.props;
 
 const photos = [
     {
@@ -21,52 +28,44 @@ const photos = [
 ---
 
 <style>
-    /* Ocultar scrollbar pero mantener funcionalidad */
     .scrollbar-hide {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
-    
+
     .scrollbar-hide::-webkit-scrollbar {
-        display: none;  /* Chrome, Safari and Opera */
+        display: none;
     }
 </style>
 
 <section id="about" class="w-full max-w-[750px] px-5 py-10 mx-auto flex flex-col gap-8 block-dashed-no-top">
     <h2 class="text-2xl dark:text-white">
-        About Me
+        {t.title}
     </h2>
-    <p class="text-2xl dark:text-white">
-        I’m <span class="text-accent">Diego M. Zuñiga</span>, a 21-year-old Systems Engineer from Cali, Colombia, passionate about building digital products that make people’s lives easier.
-    </p>
+    <p class="text-2xl dark:text-white" set:html={t.intro} />
     <div class="flex justify-between flex-col gap-5">
         <ul class="sm:hidden photos-scroll flex flex-row gap-10 justify-start overflow-x-scroll w-full p-4 scrollbar-hide">
             {photos.map((photo) => (
                 <li class="shrink-0">
-                    <img 
-                      src={photo.url} 
-                      alt={photo.alt} 
-                      width="200" 
+                    <img
+                      src={photo.url}
+                      alt={photo.alt}
+                      width="200"
                       height="200"
                       loading="lazy"
-                      class={`aspect-square border-8 border-primary rounded-[30px] overflow-hidden dark:border-white object-cover w-[200px] h-[200px] shadow-lg z-10 ${photo.transform}`} 
+                      class={`aspect-square border-8 border-primary rounded-[30px] overflow-hidden dark:border-white object-cover w-[200px] h-[200px] shadow-lg z-10 ${photo.transform}`}
                     />
                 </li>
             ))}
         </ul>
         <ImagesTrip client:load />
         </div>
-        <p class="italic -mt-8 text-secondary text-sm text-center sm:text-end">Some photos from my last trip in Ecuador 🇪🇨.</p>
+        <p class="italic -mt-8 text-secondary text-sm text-center sm:text-end">{t.photosCaption}</p>
     </div>
-    <p class="text-secondary">
-        Currently, I’m expanding my skills in <span class="font-semibold">DevOps</span> — exploring Linux environments, CI/CD pipelines, and cloud infrastructure
-        <br /><br />
-        Outside of code, you’ll find me cheering for Deportivo Cali, listening to all kinds of music (salsa, electronic, rap, and more), or playing competitive games like Fortnite. My long-term goal is to <span class="font-bold">lead impactful tech projects</span> and guide teams to build products that truly improve people’s lives.
-    </p>
+    <p class="text-secondary" set:html={t.body} />
 </section>
 
 <script>
-    // Inicializar scroll al inicio
     document.addEventListener('DOMContentLoaded', () => {
         const photosScroll = document.querySelector('.photos-scroll');
         if (photosScroll) {
