@@ -26,15 +26,6 @@ const { t, lang } = Astro.props;
         <a href="#contact" class="hidden sm:block p-2 bg-accent text-white rounded-md hover:bg-accent-hover transition-colors">
             {t.contact}
         </a>
-        <!-- Language switcher -->
-        <a
-            href={t.switchLangHref}
-            aria-label={t.switchLangLabel}
-            data-lang-switch
-            class="p-2 text-sm font-bold rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:cursor-pointer dark:text-white"
-        >
-            {t.switchLang}
-        </a>
         <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:cursor-pointer">
             <span id="theme-icon-sun" class="hidden dark:block">
                 <IconSun />
@@ -58,7 +49,6 @@ const { t, lang } = Astro.props;
         <a href="#skills">{t.skills}</a>
         <a href="#about">{t.about}</a>
         <a href="#contact">{t.contact}</a>
-        <a href={t.switchLangHref} data-lang-switch class="text-accent">{t.switchLang}</a>
     </div>
     <div class="flex flex-col gap-2">
         <p class="text-accent">{t.socials}</p>
@@ -96,18 +86,6 @@ const { t, lang } = Astro.props;
     document.addEventListener('DOMContentLoaded', () => {
         const theme = getThemePreference();
         updateTheme(theme);
-
-        // Language switch: set cookie so middleware respects user choice
-        const langSwitchers = document.querySelectorAll('[data-lang-switch]');
-        langSwitchers.forEach((el) => {
-            el.addEventListener('click', (e) => {
-                e.preventDefault();
-                const href = (el as HTMLAnchorElement).getAttribute('href') || '/';
-                const newLang = href.startsWith('/es') ? 'es' : 'en';
-                document.cookie = `lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
-                window.location.href = href;
-            });
-        });
 
         // Manejar el click en el botón de tema
         const themeToggle = document.getElementById('theme-toggle');
@@ -153,7 +131,7 @@ const { t, lang } = Astro.props;
         const mobileMenu = document.getElementById('mobile-menu');
         const menuButton = document.getElementById('menu-btn');
         const closeButton = document.getElementById('close-btn');
-        const links = mobileMenu?.querySelectorAll('a:not([data-lang-switch])');
+        const links = mobileMenu?.querySelectorAll('a');
 
         const openMenu = () => {
             if (mobileMenu) {

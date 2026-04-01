@@ -1,9 +1,9 @@
 import BounceCards from './ui/bounce-cards.tsx';
 
 const images = [
-  "./trip_1.jpg",
-  "./trip_2.jpg",
-  "./trip_3.jpg",
+  "/trip_1.jpg",
+  "/trip_2.jpg",
+  "/trip_3.jpg",
 ];
 
 const transformStyles = [

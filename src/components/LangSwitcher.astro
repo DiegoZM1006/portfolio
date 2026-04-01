@@ -1,0 +1,29 @@
+---
+import type { Translations } from "../i18n";
+
+interface Props {
+    t: Translations["nav"];
+}
+
+const { t } = Astro.props;
+---
+
+<a
+    href={t.switchLangHref}
+    aria-label={t.switchLangLabel}
+    id="lang-switcher"
+    class="fixed bottom-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-accent text-white font-bold text-sm shadow-lg hover:bg-accent-hover transition-all hover:scale-110 hover:cursor-pointer"
+>
+    {t.switchLang}
+</a>
+
+<script>
+    const langSwitcher = document.getElementById('lang-switcher');
+    langSwitcher?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = langSwitcher.getAttribute('href') || '/';
+        const newLang = href.startsWith('/es') ? 'es' : 'en';
+        document.cookie = `lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+        window.location.href = href;
+    });
+</script>
