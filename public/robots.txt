@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://diegomueses.dev/sitemap-index.xml
+Sitemap: https://diegozm.netlify.app/sitemap-index.xml
